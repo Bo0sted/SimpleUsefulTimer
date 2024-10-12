@@ -7,6 +7,4 @@ I made this timer with ease of use and simplicity in mind. Default settings show
 Number 1 = Pause/Resume timer
 Number 2 = Reset timer
 
-This is a base I intend to use for a future project which is a helper utility for [Phasmophobia (one of my favorite games)](https://phasmophobia.fandom.com/wiki/Main_Page), so ill probably continue adding stuff to here occasionally
-
 Please feel free to report any bugs and leave any feedback / code reviews. i am a young college student always trying to improve my coding skills.
