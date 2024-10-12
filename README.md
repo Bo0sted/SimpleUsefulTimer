@@ -1,11 +1,12 @@
+
+# SimpleUsefulTimer
 ![image](https://github.com/user-attachments/assets/f421d2a1-621c-4b66-a09f-badf1212e44b)
 
-press 1 to pause/resume and 2 to reset
-settings are saved automatically to local app data under the folder "SimpleUsefulTimer". to reset your settings, you may delete this folder
+I made this timer with ease of use and simplicity in mind. Default settings shown in the picture. Any configuration gets saved automatically without additional user input!
 
-future plans: 
-idk to be completely honest, i get high and just come up with shit
+Number 1 = Pause/Resume timer
+Number 2 = Reset timer
 
-feedback:
-PLEASE leave feedback and bug reports. i have a full time job and im a student so i may not see them immediately, but they are IMMENSLY appreciated and will be considered for future releases. i am always trying to get better at coding so reading any feedback helps a lot!
+This is a base I intend to use for a future project which is a helper utility for [Phasmophobia (one of my favorite games)](https://phasmophobia.fandom.com/wiki/Main_Page), so ill probably continue adding stuff to here occasionally
 
+Please feel free to report any bugs and leave any feedback / code reviews. i am a young college student always trying to improve my coding skills.
