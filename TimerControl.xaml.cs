@@ -32,11 +32,11 @@ namespace SimpleUsefulTimer
 {
     public partial class TimerControl : INotifyPropertyChanged
     {
-        public static TimerControl? Self = null;
-        public static TimerView? timerView = null;
+        public static TimerControl Self;
+        public static TimerView timerView;
         private Properties.Settings s = Properties.Settings.Default;
         public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        public static Stopwatch? stopWatch = null;
+        public static Stopwatch stopWatch;
         string currentTime = "";
         private bool _is_background_default, _is_background_transparent = false;
         public bool IsBackgroundDefault { get { return _is_background_default; } set { _is_background_default = value; OnPropertyChanged("IsBackgroundDefault"); } }
@@ -44,12 +44,12 @@ namespace SimpleUsefulTimer
         public bool IsBackgroundCustom { get { if (IsBackgroundDefault == false && IsBackgroundTransparent == false) return true; else return false; } }
         private bool _useCustomForeground = false;
         public bool UseCustomForeground { get { return _useCustomForeground; }set { _useCustomForeground = value;OnPropertyChanged("UseCustomForeground"); } }
-        private Brush? _foreground = null;
+        private Brush _foreground= Brushes.Transparent;
         public Brush MainTimerForeground { get { return _foreground; } set { _foreground = value; OnPropertyChanged("MainTimerForeground"); } }
 
         private bool _useForegroundGradient = false;
         public bool UseForegroundGradient { get { return _useForegroundGradient; } set { _useForegroundGradient = value; OnPropertyChanged("UseForegroundGradient"); } }
-        private Brush? _foregroundGradient;
+        private Brush _foregroundGradient = Brushes.Transparent;
         public Brush ForegroundGradient { get { return _foregroundGradient; } set { _foregroundGradient = value; OnPropertyChanged("ForegroundGradient"); } }
 
         private Boolean _hex_color_input = false;
@@ -75,7 +75,7 @@ namespace SimpleUsefulTimer
                 OnPropertyChanged("Timer");
             }
         }
-        private int _fontSize = 0;
+        private int _fontSize = 55;
         public int TimerFontSize
         {
             get
@@ -88,7 +88,7 @@ namespace SimpleUsefulTimer
                 OnPropertyChanged("TimerFontSize");
             }
         }
-        private Brush? _background = null;
+        private Brush _background = Brushes.White;
         public Brush MainTimerBackground
         {
             get => _background;
@@ -140,7 +140,6 @@ namespace SimpleUsefulTimer
             _resetTimerHotkey = (Key)(s.ResetTimerHotkey == 0 ? s.DefaultResetTimerHotkey : s.ResetTimerHotkey);
             _toggleTimerHotkey = (Key)(s.ToggleTimerHotkey == 0 ? s.DefaultToggleTimerHotkey : s.ToggleTimerHotkey);
             hotkeyLoop = new HotkeyResponderLoop(ref Self);
-            //this.Loaded += TimerControl_Loaded;
         }
 
         public static void SetWindowEnabledOrNot(bool enableWindow)
@@ -187,7 +186,7 @@ namespace SimpleUsefulTimer
                 SaveConfig();
                 return;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MainTimerBackground = ConvertColorToBrush(s.DefaultTimerBackground);
                 return;
@@ -324,7 +323,7 @@ namespace SimpleUsefulTimer
                 SaveConfig();
                 return;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MainTimerForeground = ConvertColorToBrush(s.DefaultTimerForeground);
                 return;
@@ -334,7 +333,7 @@ namespace SimpleUsefulTimer
         private void UseCustomForegroundGradientCheck_Checked(object sender, RoutedEventArgs e)
         {
             MainTimerForeground = (s.TimerForeground.IsEmpty ? ConvertColorToBrush(s.DefaultTimerForeground) : GetGradientFrom(s.TimerForeground, s.TimerForegroundGradient));
-            GradientHexColorInput.Text = (s.TimerForegroundGradient == null ? ColorToHex( s.DefaultForegroundGradient): ColorToHex(s.TimerForegroundGradient));
+            GradientHexColorInput.Text = (s.TimerForegroundGradient.IsEmpty ? ColorToHex( s.DefaultForegroundGradient): ColorToHex(s.TimerForegroundGradient));
             UseForegroundGradient = true;
             s.UseTimerForegroundGradient = true;
             SaveConfig();
@@ -372,7 +371,7 @@ namespace SimpleUsefulTimer
                 SaveConfig();
                 return;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MainTimerForeground = ConvertColorToBrush(s.DefaultTimerForeground);
                 return;
@@ -406,7 +405,7 @@ namespace SimpleUsefulTimer
 
         private void NumberBox_ValueChanged(object sender, RoutedEventArgs e)
         {
-            s.TimerFontSize = (int)(FontSizeNumberBox.Value != null ? FontSizeNumberBox.Value: 0);
+            s.TimerFontSize = (FontSizeNumberBox.Text != "" ? Int32.Parse(FontSizeNumberBox.Text): s.DefaultTimerFontSize);
             s.Save();
         }
     }

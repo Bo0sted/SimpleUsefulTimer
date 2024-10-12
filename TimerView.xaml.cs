@@ -34,8 +34,9 @@ namespace SimpleUsefulTimer
         {
             InitializeComponent();
             timerControl = tc;
+            DataContext = tc;
 
-            timerControl.TimerFontSize = (s.TimerFontSize == 0 ? s.DefaultTimerFontSize : s.TimerFontSize);
+            timerControl.TimerFontSize = s.TimerFontSize == 0 ? s.DefaultTimerFontSize : s.TimerFontSize;
             var position = (s.LastTimerWindowPosition.IsEmpty ? s.DefaultWindowPosition:s.LastTimerWindowPosition);
             this.Top = position.Y;
             this.Left = position.X;

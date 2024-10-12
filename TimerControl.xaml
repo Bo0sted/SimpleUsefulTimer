@@ -37,7 +37,7 @@
             <TextBlock Margin="125,10,0,0" Text="Gradient" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <ui:NumberBox x:Name="FontSizeNumberBox" Text="{Binding TimerFontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" SmallChange="5" ValueChanged="NumberBox_ValueChanged" Minimum="5" Maximum="1000" IsUndoEnabled="False" ClearButtonEnabled="False"/>
+            <ui:NumberBox x:Name="FontSizeNumberBox" Text="{Binding TimerFontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" SmallChange="5" ValueChanged="NumberBox_ValueChanged" Minimum="5" Maximum="1000" IsUndoEnabled="False" ClearButtonEnabled="False"/>
             <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="19*"/>
