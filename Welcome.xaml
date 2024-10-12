@@ -1,0 +1,26 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleUsefulTimer"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SimpleUsefulTimer.Welcome"
+        mc:Ignorable="d"
+        Title="Welcome to Simple User Timer!" SizeToContent="Height" Width="400" Background="#0F0F0F" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Topmost="True" MouseDown="Window_MouseDown" Closed="Window_Closed">
+    <StackPanel Margin="15">
+        <TextBlock FontSize="25" x:Name="WarmWelcome" Text="" FontFamily="Segoe UI Variable Display Bold" Foreground="White"/>
+        <TextBlock FontFamily="Segoe UI Variable" Foreground="White" TextWrapping="Wrap">
+            <Bold><Italic><Run Text="Right click"/></Italic></Bold><Run Text=" on the "/><Bold>
+            <Italic><Run Text="Timer"/></Italic></Bold><Run Text=" anytime you want to show or hide the configuration window."/><LineBreak/>
+            <LineBreak/><Bold><Italic><Run Text="Your settings"/></Italic>
+            </Bold><Run Text=" are tied to your Windows account, and get automatically saved anytime you make a change."/>
+            </TextBlock>
+
+        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+            <Button x:Name="SoftCloseWindow" Content="Ok" Margin="0,0,5,0" Click="Button_Click"/>
+            <Button x:Name="HardCloseWindow" Content="Disable this message" Click="HardCloseWindow_Click"/>
+        </StackPanel>
+        <TextBlock Margin="0,20,0,0" Foreground="#FFD700" Text="Please report any bugs or feedback on my Github page Thank you :)" TextWrapping="Wrap" TextDecorations="Underline" Cursor="Hand" MouseDown="TextBlock_MouseDown"/>
+        <TextBlock Margin="0,10,0,0" FontFamily="Segoe UI Semibold" Foreground="White" Text="Version 0.1A"/>
+    </StackPanel>
+</Window>

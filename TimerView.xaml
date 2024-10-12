@@ -1,0 +1,24 @@
+﻿<Window x:Class="SimpleUsefulTimer.TimerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SimpleUsefulTimer"
+      mc:Ignorable="d" 
+      SizeToContent="WidthAndHeight"
+      Name="TimerViewWindow" Topmost="True" Title="TimerView" DataContext="{Binding RelativeSource={RelativeSource  AncestorType=local:TimerControl}}"  AllowsTransparency="True" Background="Transparent"  WindowStyle="None" Closed="Window_Closed" Loaded="Window_Loaded">
+
+    <StackPanel MouseDown="Window_MouseDown">
+        <TextBlock 
+            MouseRightButtonDown="Preview_MouseRightButtonUp" 
+            Name="MainTimer" 
+            Text="{Binding Timer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+            FontFamily="Seogue UI Variable Bold Display" 
+            Background="{Binding MainTimerBackground}" 
+            FontSize="{Binding TimerFontSize, Mode=TwoWay}" 
+            FontWeight="Bold"
+            Foreground="{Binding MainTimerForeground, Mode=OneWay}"
+            >
+        </TextBlock>
+    </StackPanel>
+</Window>

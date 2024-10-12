@@ -1,0 +1,59 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleUsefulTimer"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SimpleUsefulTimer.TimerControl"
+        mc:Ignorable="d"
+        Title="TimerControl" Visibility="Visible" SizeToContent="Height" Width="800" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" ResizeMode="NoResize">
+    
+    <StackPanel Margin="15">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Timer Settings" FontFamily="Segoe UI Variable Display Bold" FontSize="25" Foreground="White"/>
+            <TextBlock 
+                Visibility="Visible"
+                Margin="10"
+                Text="(Hotkeys are disabled while this window is visible)"
+                FontFamily="Segoe UI Semibold"
+                Foreground="Gold"
+                VerticalAlignment="Bottom"
+                />
+        </StackPanel>
+        <TextBlock Margin="0,10,0,0" Text="Background" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <StackPanel Orientation="Horizontal">
+            <RadioButton GroupName="background" IsChecked="{Binding IsBackgroundDefault, UpdateSourceTrigger=PropertyChanged}" Checked="RadioButton_Checked" Content="Default"/>
+            <RadioButton GroupName="background" IsChecked="{Binding IsBackgroundTransparent, UpdateSourceTrigger=PropertyChanged}" Checked="RadioButton_Checked" Content="Transparent"/>
+            <Grid>
+                <RadioButton x:Name="EnableHexInput" IsChecked="{Binding IsBackgroundCustom, Mode=OneWay}" GroupName="background" Checked="RadioButton_Checked" Content="Hex" Width="85"/>
+                <TextBox FontFamily="Seogue UI Variable" Margin="110,0,0,0" x:Name="BackgroundHexColorInput" Width="100" IsEnabled="{Binding IsChecked, ElementName=EnableHexInput, TargetNullValue=false}" TextChanged="BackgroundHexColorInput_TextChanged" MaxLength="6"/>
+                <TextBlock Text="#" FontFamily="Seogue UI Variable" Foreground="{Binding Foreground, ElementName=BackgroundHexColorInput}" FontSize="18" Margin="111,7,0,0" HorizontalAlignment="Left" Width="17"/>
+
+            </Grid>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,10,0,0" Text="Font Size" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="115,10,0,0" Text="Foreground" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="125,10,0,0" Text="Gradient" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <ui:NumberBox x:Name="FontSizeNumberBox" Text="{Binding TimerFontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" SmallChange="5" ValueChanged="NumberBox_ValueChanged" Minimum="5" Maximum="1000" IsUndoEnabled="False" ClearButtonEnabled="False"/>
+            <Grid Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="19*"/>
+                    <ColumnDefinition Width="86*"/>
+                </Grid.ColumnDefinitions>
+                <ui:ToggleSwitch x:Name="UseCustomForegroundCheck" IsChecked="{Binding UseCustomForeground, Mode=TwoWay}" Unchecked="UseCustomForegroundCheck_Unchecked" Checked="EnableCustomForeground_Checked" Margin="24,0,0,0" Width="46" Height="24" Grid.ColumnSpan="2"/>
+                <TextBox FontFamily="Seogue UI Variable" Margin="100,7,0,10" x:Name="ForegroundHexColorInput" Width="100" IsEnabled="{Binding IsChecked, ElementName=UseCustomForegroundCheck, TargetNullValue=false}" TextChanged="ForegroundHexColorInput_TextChanged" MaxLength="6" Grid.Column="1"/>
+                <TextBlock Text="#" FontSize="18" FontFamily="Seogue UI Variable" Foreground="{Binding Foreground, ElementName=BackgroundHexColorInput}" Margin="100,15,0,0" HorizontalAlignment="Left" Width="13" Grid.Column="1"/>
+            </Grid>
+            <Grid>
+                <ui:ToggleSwitch x:Name="UseCustomForegroundGradientCheck" IsEnabled="{Binding IsChecked, ElementName=UseCustomForegroundCheck}" IsChecked="{Binding UseForegroundGradient, Mode=TwoWay}" Checked="UseCustomForegroundGradientCheck_Checked" Unchecked="UseCustomForegroundGradientCheck_Unchecked" Width="46" Height="23" Margin="24,12,0,0" VerticalAlignment="Top"/>
+                <TextBox FontFamily="Seogue UI Variable" Margin="100,7,0,10" x:Name="GradientHexColorInput" Width="100" IsEnabled="{Binding IsChecked, ElementName=UseCustomForegroundGradientCheck, TargetNullValue=false}" TextChanged="ForegroundGradientHexColorInput_TextChanged" MaxLength="6" Grid.Column="1"/>
+                <TextBlock Text="#" FontSize="18" FontFamily="Seogue UI Variable" Foreground="{Binding Foreground, ElementName=BackgroundHexColorInput}" Margin="100,15,0,0" HorizontalAlignment="Left" Width="13" Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
+        <!--        <TextBlock Margin="0,10,0,0" Text="Text" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/> -->
+        <Button Margin="0,10,0,0" Name="ResetWelcomeMessage" Content="Reset Welcome Message" Click="ResetWelcomeMessage_Click"/>
+    </StackPanel>
+</Window>
