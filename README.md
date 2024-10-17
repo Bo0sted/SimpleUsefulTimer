@@ -1,6 +1,6 @@
 
 # SimpleUsefulTimer
-![image](https://github.com/user-attachments/assets/f421d2a1-621c-4b66-a09f-badf1212e44b)
+![image](![image](https://github.com/user-attachments/assets/c831bd38-b140-47e6-82b1-44eafa5ee108))
 
 I made this timer with ease of use and simplicity in mind. Default settings shown in the picture. Any configuration gets saved automatically without additional user input!
 
