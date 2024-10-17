@@ -7,4 +7,4 @@ I made this timer with ease of use and simplicity in mind. Default settings show
 Number 1 = Pause/Resume timer
 Number 2 = Reset timer
 
-Please feel free to report any bugs and leave any feedback / code reviews. i am a young college student always trying to improve my coding skills.
+Please feel free to report any bugs and leave any feedback / code reviews.
