@@ -13,14 +13,14 @@
             <Bold><Italic><Run Text="Right click"/></Italic></Bold><Run Text=" on the "/><Bold>
             <Italic><Run Text="Timer"/></Italic></Bold><Run Text=" anytime you want to show or hide the configuration window."/><LineBreak/>
             <LineBreak/><Bold><Italic><Run Text="Your settings"/></Italic>
-            </Bold><Run Text=" are tied to your Windows account, and get automatically saved anytime you make a change."/>
-            </TextBlock>
+            </Bold><Run Text=" are saved automatically when the config window is closed and stored in "/><Italic>your Local AppData folder</Italic>
+        </TextBlock>
 
         <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
             <Button x:Name="SoftCloseWindow" Content="Ok" Margin="0,0,5,0" Click="Button_Click"/>
             <Button x:Name="HardCloseWindow" Content="Disable this message" Click="HardCloseWindow_Click"/>
         </StackPanel>
-        <TextBlock Margin="0,20,0,0" Foreground="#FFD700" Text="Please report any bugs or feedback on my Github page Thank you :)" TextWrapping="Wrap" TextDecorations="Underline" Cursor="Hand" MouseDown="TextBlock_MouseDown"/>
-        <TextBlock Margin="0,10,0,0" FontFamily="Segoe UI Semibold" Foreground="White" Text="Version 0.1A"/>
+        <TextBlock Margin="0,20,0,0" Foreground="#E32636" Text="Please report any bugs or feedback on my Github page Thank you :)" TextWrapping="Wrap" TextDecorations="Underline" Cursor="Hand" MouseDown="TextBlock_MouseDown"/>
+        <TextBlock Margin="0,10,0,0" FontFamily="Segoe UI Semibold" Foreground="White"><Run Text="Version 0.2A"/><LineBreak/><Run/></TextBlock>
     </StackPanel>
 </Window>

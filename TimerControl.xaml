@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleUsefulTimer"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SimpleUsefulTimer.TimerControl"
         mc:Ignorable="d"
-        Title="TimerControl" Visibility="Visible" SizeToContent="Height" Width="800" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" ResizeMode="NoResize">
+        Title="TimerControl" Visibility="Hidden" SizeToContent="Height" Width="800" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" ResizeMode="NoResize">
     
     <StackPanel Margin="15">
         <StackPanel Orientation="Horizontal">
@@ -16,7 +16,7 @@
                 Margin="10"
                 Text="(Hotkeys are disabled while this window is visible)"
                 FontFamily="Segoe UI Semibold"
-                Foreground="Gold"
+                Foreground="{Binding MainTimerForeground}"
                 VerticalAlignment="Bottom"
                 />
         </StackPanel>
@@ -35,6 +35,7 @@
             <TextBlock Margin="0,10,0,0" Text="Font Size" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
             <TextBlock Margin="115,10,0,0" Text="Foreground" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
             <TextBlock Margin="125,10,0,0" Text="Gradient" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="165,10,0,0" Text="Font" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <ui:NumberBox x:Name="FontSizeNumberBox" Text="{Binding TimerFontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TextWrapping="Wrap" Width="150" HorizontalAlignment="Left" Margin="0,5,0,5" SmallChange="5" ValueChanged="NumberBox_ValueChanged" Minimum="5" Maximum="1000" IsUndoEnabled="False" ClearButtonEnabled="False"/>
@@ -52,6 +53,7 @@
                 <TextBox FontFamily="Seogue UI Variable" Margin="100,7,0,10" x:Name="GradientHexColorInput" Width="100" IsEnabled="{Binding IsChecked, ElementName=UseCustomForegroundGradientCheck, TargetNullValue=false}" TextChanged="ForegroundGradientHexColorInput_TextChanged" MaxLength="6" Grid.Column="1"/>
                 <TextBlock Text="#" FontSize="18" FontFamily="Seogue UI Variable" Foreground="{Binding Foreground, ElementName=BackgroundHexColorInput}" Margin="100,15,0,0" HorizontalAlignment="Left" Width="13" Grid.Column="1"/>
             </Grid>
+            <Button Name="FontChangeDialogueOpener" Margin="40,0,0,0" Content="Font Changer" Click="FontChangeDialogueOpener_Click"/>
         </StackPanel>
         <!--        <TextBlock Margin="0,10,0,0" Text="Text" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/> -->
         <Button Margin="0,10,0,0" Name="ResetWelcomeMessage" Content="Reset Welcome Message" Click="ResetWelcomeMessage_Click"/>

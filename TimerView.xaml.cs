@@ -76,10 +76,14 @@ namespace SimpleUsefulTimer
                 timerControl.ForegroundGradient = TimerControl.ConvertColorToBrush(s.TimerForegroundGradient);
                 timerControl.GradientHexColorInput.Text = TimerControl.ColorToHex(s.TimerForegroundGradient);
                 timerControl.MainTimerForeground = (s.UseTimerForegroundGradient ? TimerControl.GetGradientFrom(s.TimerForeground, s.TimerForegroundGradient): TimerControl.ConvertColorToBrush(s.DefaultTimerForeground));
-                return;
             }
+            else
+                timerControl.MainTimerForeground = TimerControl.ConvertColorToBrush(foreground);
 
-            timerControl.MainTimerForeground = TimerControl.ConvertColorToBrush(foreground);
+            if (s.TimerFont != "")
+                tc.TimerCustomFont = s.TimerFont;
+            else
+                tc.TimerCustomFont = s.DefaultTimerFont;
             this.UpdateLayout();
         }
 

@@ -87,7 +87,7 @@ namespace SimpleUsefulTimer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Gold")]
+        [global::System.Configuration.DefaultSettingValueAttribute("187, 42, 60")]
         public global::System.Drawing.Color DefaultTimerForeground {
             get {
                 return ((global::System.Drawing.Color)(this["DefaultTimerForeground"]));
@@ -130,7 +130,7 @@ namespace SimpleUsefulTimer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("187, 155, 73")]
+        [global::System.Configuration.DefaultSettingValueAttribute("227, 38, 54")]
         public global::System.Drawing.Color DefaultForegroundGradient {
             get {
                 return ((global::System.Drawing.Color)(this["DefaultForegroundGradient"]));
@@ -200,6 +200,27 @@ namespace SimpleUsefulTimer.Properties {
             }
             set {
                 this["ResetTimerHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TimerFont {
+            get {
+                return ((string)(this["TimerFont"]));
+            }
+            set {
+                this["TimerFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI Variable Display Bold")]
+        public string DefaultTimerFont {
+            get {
+                return ((string)(this["DefaultTimerFont"]));
             }
         }
     }

@@ -13,7 +13,7 @@
             MouseRightButtonDown="Preview_MouseRightButtonUp" 
             Name="MainTimer" 
             Text="{Binding Timer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-            FontFamily="Seogue UI Variable Bold Display" 
+            FontFamily="{Binding TimerCustomFont}" 
             Background="{Binding MainTimerBackground}" 
             FontSize="{Binding TimerFontSize, Mode=TwoWay}" 
             FontWeight="Bold"

@@ -26,6 +26,7 @@ using Color = System.Drawing.Color;
 using ColorConverter = System.Drawing.ColorConverter;
 using System.Windows.Automation.Peers;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 
 namespace SimpleUsefulTimer
@@ -53,6 +54,7 @@ namespace SimpleUsefulTimer
         public Brush ForegroundGradient { get { return _foregroundGradient; } set { _foregroundGradient = value; OnPropertyChanged("ForegroundGradient"); } }
 
         private Boolean _hex_color_input = false;
+        private bool didWarnUserAboutConfigWindow = false;
         public Boolean HexColorInput
         {
             get { return _hex_color_input; }
@@ -86,6 +88,19 @@ namespace SimpleUsefulTimer
             {
                 _fontSize = value;
                 OnPropertyChanged("TimerFontSize");
+            }
+        }
+        private string _customFont = "";
+        public string TimerCustomFont
+        {
+            get
+            {
+                return _customFont;
+            }
+            set
+            {
+                _customFont = value;
+                OnPropertyChanged("TimerCustomFont");
             }
         }
         private Brush _background = Brushes.White;
@@ -162,6 +177,11 @@ namespace SimpleUsefulTimer
                 default:
                     break;
 
+            }
+
+            if (this.Visibility == Visibility.Visible)
+            {
+                timerView.MainTimer.Text += " !";
             }
                 
         }
@@ -402,6 +422,13 @@ namespace SimpleUsefulTimer
             s.DidReadWelcomeMessage = false;
             s.Save();
         }
+
+        private void FontChangeDialogueOpener_Click(object sender, RoutedEventArgs e)
+        {
+            var fontDialogue = new FontPicker(ref Self);
+            fontDialogue.ShowDialog();
+        }
+
 
         private void NumberBox_ValueChanged(object sender, RoutedEventArgs e)
         {
