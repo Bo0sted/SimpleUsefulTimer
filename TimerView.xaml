@@ -1,4 +1,4 @@
-﻿<Window x:Class="SimpleUsefulTimer.TimerView"
+﻿<Window xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"  x:Class="SimpleUsefulTimer.TimerView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,19 +6,41 @@
       xmlns:local="clr-namespace:SimpleUsefulTimer"
       mc:Ignorable="d" 
       SizeToContent="WidthAndHeight"
-      Name="TimerViewWindow" Topmost="True" Title="TimerView" DataContext="{Binding RelativeSource={RelativeSource  AncestorType=local:TimerControl}}"  AllowsTransparency="True" Background="Transparent"  WindowStyle="None" Closed="Window_Closed" Loaded="Window_Loaded">
+      Name="TimerViewWindow" Topmost="True" Title="TimerView" DataContext="{Binding RelativeSource={RelativeSource  AncestorType=local:TimerControl}}"  AllowsTransparency="True" Background="Transparent"  WindowStyle="None" Closed="Window_Closed" Loaded="Window_Loaded" MouseDown="Window_MouseDown" MouseRightButtonUp="TimerViewWindow_MouseRightButtonUp">
+    <Window.Resources>
+        <local:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+        <local:IntToVerticalAlignmentConverter x:Key="IntToVerticalAlignmentConverter" />
+    </Window.Resources>
 
-    <StackPanel MouseDown="Window_MouseDown">
-        <TextBlock 
-            MouseRightButtonDown="Preview_MouseRightButtonUp" 
+    <StackPanel Name="TimerViewContainer" Orientation="Horizontal" Background="{Binding MainTimerBackground}">
+        <TextBlock Background="{Binding MainTimerBackground}"
             Name="MainTimer" 
             Text="{Binding Timer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-            FontFamily="{Binding TimerCustomFont}" 
-            Background="{Binding MainTimerBackground}" 
+            FontFamily="{Binding TimerCustomFont}"  
             FontSize="{Binding TimerFontSize, Mode=TwoWay}" 
             FontWeight="Bold"
             Foreground="{Binding MainTimerForeground, Mode=OneWay}"
             >
         </TextBlock>
+        <TextBlock
+            Name="MainTimerMs" 
+            Text="{Binding TimerMs, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+            FontFamily="{Binding TimerCustomFont}" 
+            FontSize="{Binding AdjustedTimerFontSize}" 
+            FontWeight="Bold"
+            Foreground="{Binding MainTimerForeground, Mode=OneWay}"
+            Visibility="{Binding MsFieldAlignment, Converter={StaticResource IntToVisibilityConverter}}"
+            VerticalAlignment="{Binding MsFieldAlignment, Converter={StaticResource IntToVerticalAlignmentConverter}}"
+            IsVisibleChanged="MainTimerMs_IsVisibleChanged"
+            Margin="0,0,20,0"
+            >
+        </TextBlock>
+        <ui:Flyout Name="RightClickActionContainer" >
+            <StackPanel Orientation="Horizontal">
+                <Button Name="CloseTimerAction" Content="Close" Click="CloseTimerAction_Click"/>
+                <Button Name="OpenTimerConfigAction" Content="Config" Click="OpenTimerConfigAction_Click"/>
+                <Button Name="Github" Content="Check for Updates (WIP)" Click="OpenTimerConfigAction_Click"/>
+            </StackPanel>
+        </ui:Flyout>
     </StackPanel>
 </Window>

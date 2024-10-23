@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Packaging;
 using System.Linq;
+using System.Reflection;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,7 @@ namespace SimpleUsefulTimer
         {
             InitializeComponent();
             WarmWelcome.Text = $"Welcome, {Environment.UserName}";
+            VersionNumber.Text = Assembly.GetAssembly(MethodBase.GetCurrentMethod().DeclaringType).GetName().Version.ToString();
             TimerControl.SetWindowEnabledOrNot(false);
         }
 

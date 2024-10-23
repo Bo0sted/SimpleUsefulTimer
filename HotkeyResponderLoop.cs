@@ -65,7 +65,7 @@ namespace SimpleUsefulTimer
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (tc.IsVisible) return CallNextHookEx(_hookID, nCode, wParam, lParam); 
+            if (tc.IsKeyboardFocused) return CallNextHookEx(_hookID, nCode, wParam, lParam); 
 
             if (nCode >= 0)
             {

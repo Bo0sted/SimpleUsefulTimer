@@ -27,6 +27,7 @@ using ColorConverter = System.Drawing.ColorConverter;
 using System.Windows.Automation.Peers;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 
 namespace SimpleUsefulTimer
@@ -38,7 +39,6 @@ namespace SimpleUsefulTimer
         private Properties.Settings s = Properties.Settings.Default;
         public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public static Stopwatch stopWatch;
-        string currentTime = "";
         private bool _is_background_default, _is_background_transparent = false;
         public bool IsBackgroundDefault { get { return _is_background_default; } set { _is_background_default = value; OnPropertyChanged("IsBackgroundDefault"); } }
         public bool IsBackgroundTransparent { get { return _is_background_transparent; } set { _is_background_transparent = value; OnPropertyChanged("IsBackgroundTransparent"); } }
@@ -55,6 +55,9 @@ namespace SimpleUsefulTimer
 
         private Boolean _hex_color_input = false;
         private bool didWarnUserAboutConfigWindow = false;
+
+        private int _msFieldAlignment;
+        public int MsFieldAlignment { get { return _msFieldAlignment; } set { _msFieldAlignment = value; OnPropertyChanged("MsFieldAlignment"); } }
         public Boolean HexColorInput
         {
             get { return _hex_color_input; }
@@ -77,7 +80,20 @@ namespace SimpleUsefulTimer
                 OnPropertyChanged("Timer");
             }
         }
-        private int _fontSize = 55;
+        private string _timerMs = "";
+        public string TimerMs
+        {
+            get
+            {
+                return _timerMs;
+            }
+            set
+            {
+                _timerMs = value;
+                OnPropertyChanged("TimerMs");
+            }
+        }
+        private int _fontSize;
         public int TimerFontSize
         {
             get
@@ -88,8 +104,18 @@ namespace SimpleUsefulTimer
             {
                 _fontSize = value;
                 OnPropertyChanged("TimerFontSize");
+                OnPropertyChanged("AdjustedTimerFontSize");
             }
         }
+
+        public int AdjustedTimerFontSize
+        {
+            get
+            {
+                return TimerFontSize - 15;
+            }
+        }
+
         private string _customFont = "";
         public string TimerCustomFont
         {
@@ -157,6 +183,7 @@ namespace SimpleUsefulTimer
             hotkeyLoop = new HotkeyResponderLoop(ref Self);
         }
 
+
         public static void SetWindowEnabledOrNot(bool enableWindow)
         {
             Self.IsEnabled = enableWindow;
@@ -166,23 +193,22 @@ namespace SimpleUsefulTimer
             switch (stopWatch.Elapsed.TotalMinutes)
             {
                 case var expression when (stopWatch.Elapsed.TotalMinutes < 1):
-                    timerView.MainTimer.Text = stopWatch.Elapsed.ToString("ss\\.ff").TrimStart('0');
+                    Timer = stopWatch.Elapsed.ToString("ss").TrimStart('0');
+                    if (stopWatch.Elapsed.TotalMilliseconds < 1000)
+                        Timer = Timer.Insert(0,"0");
                     break;
                 case var expression when (stopWatch.Elapsed.TotalMinutes >= 1):
-                    timerView.MainTimer.Text = stopWatch.Elapsed.ToString("mm\\:ss\\.ff").TrimStart('0');
+                    Timer = stopWatch.Elapsed.ToString(@"mm\:ss").TrimStart('0');
                     break;
                 case var expression when (stopWatch.Elapsed.TotalMinutes > 60):
-                    timerView.MainTimer.Text = stopWatch.Elapsed.ToString("hh\\:mm\\::ss\\.ff").TrimStart('0');
+                    Timer = stopWatch.Elapsed.ToString(@"hh\:mm\:ss\\").TrimStart('0');
                     break;
                 default:
                     break;
 
             }
 
-            if (this.Visibility == Visibility.Visible)
-            {
-                timerView.MainTimer.Text += " !";
-            }
+            TimerMs = stopWatch.Elapsed.ToString(@"\.ff");
                 
         }
 
@@ -430,10 +456,71 @@ namespace SimpleUsefulTimer
         }
 
 
+        private void MsFieldControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MsFieldAlignment = MsFieldControl.SelectedIndex;
+        }
+
+        private void ResetSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Save();
+            timerView.Close();
+        }
+
         private void NumberBox_ValueChanged(object sender, RoutedEventArgs e)
         {
             s.TimerFontSize = (FontSizeNumberBox.Text != "" ? Int32.Parse(FontSizeNumberBox.Text): s.DefaultTimerFontSize);
             s.Save();
+        }
+
+        
+
+    }
+    public class IntToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not int) return Visibility.Hidden;
+            if ((int)value == 3) return Visibility.Hidden;
+
+            return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Visibility visibility)
+            {
+                return visibility == Visibility.Visible;
+            }
+            return false;
+        }
+    }
+
+    public class IntToVerticalAlignmentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((int)value)
+            {
+                case 3: break;
+                case 0: return VerticalAlignment.Top;
+                case 1: return VerticalAlignment.Center;
+                case 2: return VerticalAlignment.Bottom;
+            }
+            return VerticalAlignment.Stretch;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((VerticalAlignment)value)
+            {
+                case VerticalAlignment.Top: return 0;
+                case VerticalAlignment.Center: return 1;
+                case VerticalAlignment.Bottom: return 2;
+                case VerticalAlignment.Stretch: break;
+            }
+            return 3;
         }
     }
 

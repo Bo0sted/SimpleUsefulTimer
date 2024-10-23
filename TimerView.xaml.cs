@@ -20,6 +20,7 @@ using Color = System.Windows.Media.Color;
 using System.Configuration;
 using Wpf.Ui.Controls;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace SimpleUsefulTimer
 {
@@ -84,6 +85,11 @@ namespace SimpleUsefulTimer
                 tc.TimerCustomFont = s.TimerFont;
             else
                 tc.TimerCustomFont = s.DefaultTimerFont;
+
+            tc.MsFieldAlignment = s.MsFieldAlignment;
+            Width = s.WindowWidth;
+            Height = s.WindowHeight;
+
             this.UpdateLayout();
         }
 
@@ -100,16 +106,22 @@ namespace SimpleUsefulTimer
             int currentTop = (Int32)this.Top;
             var lastKnownLocation = new System.Drawing.Point(x: currentLeft, y: currentTop);
             s.LastTimerWindowPosition = lastKnownLocation;
+            s.MsFieldAlignment = timerControl.MsFieldControl.SelectedIndex;
+            s.WindowHeight = (int)Height;
+            s.WindowWidth = (int)Width;
+            s.Save();
             SaveConfig();
             Application.Current.Shutdown(0);
         }
 
-        private void Preview_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private void TimerViewWindow_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Right)
-                return;
+            /*if (e.ChangedButton != MouseButton.Right)
+                return;*/
+            RightClickActionContainer.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+            RightClickActionContainer.Show();
 
-            timerControl.Visibility = ((timerControl.Visibility is Visibility.Hidden) ? Visibility.Visible : Visibility.Hidden);
+            //timerControl.Visibility = ((timerControl.Visibility is Visibility.Hidden) ? Visibility.Visible : Visibility.Hidden);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -127,6 +139,33 @@ namespace SimpleUsefulTimer
 
             var w = new Welcome();
             w.ShowDialog();
+        }
+
+        private void MainTimerMs_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!MainTimerMs.IsVisible)
+            {
+                TimerViewContainer.Background = Brushes.Transparent;
+            }
+            else
+            {
+                var backgroundBinding = new Binding("MainTimerBackground")
+                {
+                    Source = timerControl
+                };
+                TimerViewContainer.SetBinding(StackPanel.BackgroundProperty, backgroundBinding); 
+            }
+        }
+
+        private void CloseTimerAction_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void OpenTimerConfigAction_Click(object sender, RoutedEventArgs e)
+        {
+            timerControl.Visibility = ((timerControl.Visibility is Visibility.Hidden) ? Visibility.Visible : Visibility.Hidden);
+            RightClickActionContainer.Hide();
         }
     }
 }
