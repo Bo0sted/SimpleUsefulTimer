@@ -2,7 +2,8 @@
 # SimpleUsefulTimer
 
 
-**I made this timer with ease of use and simplicity in mind. Default settings shown in the picture. Any configuration gets saved automatically without additional user input!**
+_I made this timer with ease of use and simplicity in mind. Default settings shown in the picture._
+
 **Default Keybinds:**
 Number 1 = Pause/Resume timer
 Number 2 = Reset timer
