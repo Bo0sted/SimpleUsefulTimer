@@ -5,6 +5,7 @@
 **I made this timer with ease of use and simplicity in mind. Default settings shown in the picture.**
 
 **Program Features and Behavior:**
+- Two functions: Start/Stop (Toggle) and Reset
 - Always stays on top of other programs
 - Hotkeys are global and non-blocking
 - Easy configuration and auto-saving functionality
