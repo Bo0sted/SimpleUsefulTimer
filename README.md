@@ -2,11 +2,7 @@
 # SimpleUsefulTimer
 
 
-_I made this timer with ease of use and simplicity in mind. Default settings shown in the picture._
-
-**Default Keybinds:**
-Number 1 = Pause/Resume timer
-Number 2 = Reset timer
+**I made this timer with ease of use and simplicity in mind. Default settings shown in the picture.**
 
 **Program Features and Behavior:**
 - Always stays on top of other programs
