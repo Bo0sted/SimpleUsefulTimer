@@ -65,20 +65,20 @@ namespace SimpleUsefulTimer
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (tc.IsKeyboardFocused) return CallNextHookEx(_hookID, nCode, wParam, lParam); 
+            if (tc.IsKeyboardFocused || !tc.shouldListenForHotkeys) return CallNextHookEx(_hookID, nCode, wParam, lParam); 
 
             if (nCode >= 0)
             {
                 KBDLLHOOKSTRUCT kbStruct = Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam);
 
                 //0x0101 (WM_KEYUP): Triggered when a key is released.
-               if ((wParam == (IntPtr)0x0101) &&
-                    (kbStruct.vkCode == (int)tc._toggleTimerHotkey))
+                 if ((wParam == (IntPtr)0x0101) &&
+                    (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._toggleTimerHotkey)))
                 {
                     TimerControl.ToggleTimer();
                 }
                else if ((wParam == (IntPtr)0x0101) &&
-                    (kbStruct.vkCode == (int)tc._resetTimerHotkey))
+                    (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._resetTimerHotkey)))
                 {
                     TimerControl.ResetTimer();
                 }

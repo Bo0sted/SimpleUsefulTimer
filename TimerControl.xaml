@@ -13,7 +13,7 @@
             <TextBlock 
                 Visibility="Visible"
                 Margin="10"
-                Text="(Hotkeys are disabled while this window is focused)"
+                Text="(Hotkeys are disabled while mouse is clicked into this window)"
                 FontFamily="Segoe UI Semibold"
                 Foreground="{Binding MainTimerForeground}"
                 VerticalAlignment="Bottom"
@@ -65,6 +65,10 @@
                 <ComboBoxItem Name="MsFieldBottom" Content="Align to the bottom"/>
                 <ComboBoxItem Name="MsFieldDisable" Content="Disable field"/>
             </ComboBox>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock Margin="0,10,0,0" Text="Behavior" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <Button Name="HotkeyManagerControl" Content="Hotkey manager" Click="HotkeyManagerControlButton_Click"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Margin="0,10,0,0" Name="ResetWelcomeMessage" Content="Reset Welcome Message" Click="ResetWelcomeMessage_Click"/>

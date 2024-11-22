@@ -28,8 +28,10 @@ namespace SimpleUsefulTimer
         {
             InitializeComponent();
             WarmWelcome.Text = $"Welcome, {Environment.UserName}";
-            VersionNumber.Text = Assembly.GetAssembly(MethodBase.GetCurrentMethod().DeclaringType).GetName().Version.ToString();
+            var assembly = Assembly.GetAssembly(MethodBase.GetCurrentMethod().DeclaringType).GetName();
+            VersionNumber.Text = $"{assembly.Version}";
             TimerControl.SetWindowEnabledOrNot(false);
+            GithubLink.Foreground = TimerControl.ConvertColorToBrush( Properties.Settings.Default.DefaultTimerForeground);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

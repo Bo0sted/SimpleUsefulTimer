@@ -10,6 +10,9 @@
     <Compile Update="FontPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Hotkeys.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="TimerControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="FontPicker.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Hotkeys.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Theme.xaml">

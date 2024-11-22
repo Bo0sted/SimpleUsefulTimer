@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Properties\images\alarm-clock.ico</ApplicationIcon>
     <Title>Simple Useful Timer</Title>
-    <Version>0.3-alpha</Version>
+    <Version>0.4-alpha</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

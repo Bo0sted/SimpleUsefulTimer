@@ -12,7 +12,7 @@ namespace SimpleUsefulTimer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -87,7 +87,7 @@ namespace SimpleUsefulTimer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("187, 42, 60")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2, 118, 253")]
         public global::System.Drawing.Color DefaultTimerForeground {
             get {
                 return ((global::System.Drawing.Color)(this["DefaultTimerForeground"]));
@@ -130,7 +130,7 @@ namespace SimpleUsefulTimer.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("227, 38, 54")]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color DefaultForegroundGradient {
             get {
                 return ((global::System.Drawing.Color)(this["DefaultForegroundGradient"]));

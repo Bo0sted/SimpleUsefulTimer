@@ -167,5 +167,10 @@ namespace SimpleUsefulTimer
             timerControl.Visibility = ((timerControl.Visibility is Visibility.Hidden) ? Visibility.Visible : Visibility.Hidden);
             RightClickActionContainer.Hide();
         }
+
+        private void Github_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/Bo0sted/SimpleUsefulTimer") { UseShellExecute = true });
+        }
     }
 }

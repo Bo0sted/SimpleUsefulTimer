@@ -36,6 +36,7 @@ namespace SimpleUsefulTimer
     {
         public static TimerControl Self;
         public static TimerView timerView;
+        public bool shouldListenForHotkeys = true; //Controller that child windows can use
         private Properties.Settings s = Properties.Settings.Default;
         public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public static Stopwatch stopWatch;
@@ -178,8 +179,8 @@ namespace SimpleUsefulTimer
             HexColorInput = false;
             timerView.Show();
 
-            _resetTimerHotkey = (Key)(s.ResetTimerHotkey == 0 ? s.DefaultResetTimerHotkey : s.ResetTimerHotkey);
-            _toggleTimerHotkey = (Key)(s.ToggleTimerHotkey == 0 ? s.DefaultToggleTimerHotkey : s.ToggleTimerHotkey);
+            _resetTimerHotkey = KeyInterop.KeyFromVirtualKey(s.ResetTimerHotkey == 0 ? s.DefaultResetTimerHotkey : s.ResetTimerHotkey);
+            _toggleTimerHotkey = KeyInterop.KeyFromVirtualKey(s.ToggleTimerHotkey == 0 ? s.DefaultToggleTimerHotkey : s.ToggleTimerHotkey);
             hotkeyLoop = new HotkeyResponderLoop(ref Self);
         }
 
@@ -466,6 +467,12 @@ namespace SimpleUsefulTimer
             Properties.Settings.Default.Reset();
             Properties.Settings.Default.Save();
             timerView.Close();
+        }
+
+        private void HotkeyManagerControlButton_Click(object sender, RoutedEventArgs e)
+        {
+            var hcWindow = new Hotkeys(ref Self);
+            hcWindow.ShowDialog();
         }
 
         private void NumberBox_ValueChanged(object sender, RoutedEventArgs e)

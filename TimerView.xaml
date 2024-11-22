@@ -32,14 +32,14 @@
             Visibility="{Binding MsFieldAlignment, Converter={StaticResource IntToVisibilityConverter}}"
             VerticalAlignment="{Binding MsFieldAlignment, Converter={StaticResource IntToVerticalAlignmentConverter}}"
             IsVisibleChanged="MainTimerMs_IsVisibleChanged"
-            Margin="0,0,20,0"
+            Margin="0,0,15,0"
             >
         </TextBlock>
         <ui:Flyout Name="RightClickActionContainer" >
             <StackPanel Orientation="Horizontal">
                 <Button Name="CloseTimerAction" Content="Close" Click="CloseTimerAction_Click"/>
                 <Button Name="OpenTimerConfigAction" Content="Config" Click="OpenTimerConfigAction_Click"/>
-                <Button Name="Github" Content="Check for Updates (WIP)" Click="OpenTimerConfigAction_Click"/>
+                <Button Name="Github" Content="My github" Click="Github_Click"/>
             </StackPanel>
         </ui:Flyout>
     </StackPanel>
