@@ -10,6 +10,9 @@
 - Hotkeys are global and non-blocking
 - Easy configuration and auto-saving functionality
 
+**Downsides**
+Not cross platform, sorry!
+
 Please feel free to report any bugs and leave any feedback / code reviews.
 
 To run this app smoothly please ensure you have .NET 8 installed on your PC https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-8.0.10-windows-x64-installer
