@@ -12,7 +12,7 @@ namespace SimpleUsefulTimer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.12.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -152,12 +152,12 @@ namespace SimpleUsefulTimer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DidReadWelcomeMessage {
+        public bool Setting {
             get {
-                return ((bool)(this["DidReadWelcomeMessage"]));
+                return ((bool)(this["Setting"]));
             }
             set {
-                this["DidReadWelcomeMessage"] = value;
+                this["Setting"] = value;
             }
         }
         
@@ -257,6 +257,126 @@ namespace SimpleUsefulTimer.Properties {
             }
             set {
                 this["WindowWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DidReadWelcomeMessage {
+            get {
+                return ((bool)(this["DidReadWelcomeMessage"]));
+            }
+            set {
+                this["DidReadWelcomeMessage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int EnableSystemClock {
+            get {
+                return ((int)(this["EnableSystemClock"]));
+            }
+            set {
+                this["EnableSystemClock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ClockBackground {
+            get {
+                return ((global::System.Drawing.Color)(this["ClockBackground"]));
+            }
+            set {
+                this["ClockBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI Variable Display Bold")]
+        public string ClockFont {
+            get {
+                return ((string)(this["ClockFont"]));
+            }
+            set {
+                this["ClockFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int ClockFontSize {
+            get {
+                return ((int)(this["ClockFontSize"]));
+            }
+            set {
+                this["ClockFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ClockForeground {
+            get {
+                return ((global::System.Drawing.Color)(this["ClockForeground"]));
+            }
+            set {
+                this["ClockForeground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("t")]
+        public string ClockFormat {
+            get {
+                return ((string)(this["ClockFormat"]));
+            }
+            set {
+                this["ClockFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ClockBackgroundSetting {
+            get {
+                return ((int)(this["ClockBackgroundSetting"]));
+            }
+            set {
+                this["ClockBackgroundSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ClockForegroundSetting {
+            get {
+                return ((int)(this["ClockForegroundSetting"]));
+            }
+            set {
+                this["ClockForegroundSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point LastKnowClockPosition {
+            get {
+                return ((global::System.Drawing.Point)(this["LastKnowClockPosition"]));
+            }
+            set {
+                this["LastKnowClockPosition"] = value;
             }
         }
     }

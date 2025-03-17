@@ -28,6 +28,7 @@ using System.Windows.Automation.Peers;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 
 namespace SimpleUsefulTimer
@@ -40,6 +41,7 @@ namespace SimpleUsefulTimer
         private Properties.Settings s = Properties.Settings.Default;
         public static DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public static Stopwatch stopWatch;
+        public ClockControl ?clockControlPanel = null;
         private bool _is_background_default, _is_background_transparent = false;
         public bool IsBackgroundDefault { get { return _is_background_default; } set { _is_background_default = value; OnPropertyChanged("IsBackgroundDefault"); } }
         public bool IsBackgroundTransparent { get { return _is_background_transparent; } set { _is_background_transparent = value; OnPropertyChanged("IsBackgroundTransparent"); } }
@@ -59,6 +61,12 @@ namespace SimpleUsefulTimer
 
         private int _msFieldAlignment;
         public int MsFieldAlignment { get { return _msFieldAlignment; } set { _msFieldAlignment = value; OnPropertyChanged("MsFieldAlignment"); } }
+
+        public int TimerOffsetMs { get { return timerOffsetMs; } set { timerOffsetMs = value; OnPropertyChanged("TimerOffsetMs"); } }
+        private int timerOffsetMs = 0;
+
+        private int _showSystemTime;
+        public int ShouldShowSystemTime { get { return _showSystemTime; } set { _showSystemTime = value; OnPropertyChanged("ShowSystemTime"); } }
         public Boolean HexColorInput
         {
             get { return _hex_color_input; }
@@ -141,7 +149,6 @@ namespace SimpleUsefulTimer
             }
         }
 
-        //https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=windowsdesktop-8.0
         public Key _toggleTimerHotkey;
         public Key _resetTimerHotkey;
         public bool respondToHotkeys = true;
@@ -167,6 +174,7 @@ namespace SimpleUsefulTimer
         public TimerControl()
         {
             InitializeComponent();
+            this.Visibility = Visibility.Hidden;
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -182,6 +190,10 @@ namespace SimpleUsefulTimer
             _resetTimerHotkey = KeyInterop.KeyFromVirtualKey(s.ResetTimerHotkey == 0 ? s.DefaultResetTimerHotkey : s.ResetTimerHotkey);
             _toggleTimerHotkey = KeyInterop.KeyFromVirtualKey(s.ToggleTimerHotkey == 0 ? s.DefaultToggleTimerHotkey : s.ToggleTimerHotkey);
             hotkeyLoop = new HotkeyResponderLoop(ref Self);
+            ShouldShowSystemTime = s.EnableSystemClock;
+            clockControlPanel = new ClockControl(ref Self);
+            ShouldEnableSystemClock(ShouldShowSystemTime);
+            UpdateLayout();
         }
 
 
@@ -191,28 +203,52 @@ namespace SimpleUsefulTimer
         }
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
         {
-            switch (stopWatch.Elapsed.TotalMinutes)
+            TimeSpan offset = TimeSpan.FromMilliseconds(stopWatch.Elapsed.TotalMilliseconds + TimerOffsetMs);
+            switch (offset.TotalMinutes)
             {
-                case var expression when (stopWatch.Elapsed.TotalMinutes < 1):
-                    Timer = stopWatch.Elapsed.ToString("ss").TrimStart('0');
-                    if (stopWatch.Elapsed.TotalMilliseconds < 1000)
+                case var expression when (offset.TotalMinutes < 1):
+                    Timer = offset.ToString("ss").TrimStart('0');
+                    if (offset.TotalMilliseconds < 1000)
                         Timer = Timer.Insert(0,"0");
                     break;
-                case var expression when (stopWatch.Elapsed.TotalMinutes >= 1):
-                    Timer = stopWatch.Elapsed.ToString(@"mm\:ss").TrimStart('0');
+                case var expression when (offset.TotalMinutes >= 1 && offset.TotalMinutes < 60):
+                    Timer = offset.ToString(@"mm\:ss").TrimStart('0');
                     break;
-                case var expression when (stopWatch.Elapsed.TotalMinutes > 60):
-                    Timer = stopWatch.Elapsed.ToString(@"hh\:mm\:ss\\").TrimStart('0');
+                case var expression when (offset.TotalMinutes >= 60 && offset.TotalDays < 1):
+                    Timer = offset.ToString(@"hh\:mm\:ss").TrimStart('0');
+                    break;
+                case var expression when (offset.TotalMinutes >= 60 && offset.TotalDays > 0):
+                    Timer = $"{offset.Days}:{offset:hh\\:mm\\:ss}";
                     break;
                 default:
                     break;
 
             }
 
-            TimerMs = stopWatch.Elapsed.ToString(@"\.ff");
+            TimerMs = offset.ToString(@"\.ff");
                 
         }
 
+        
+        public void ShouldEnableSystemClock(int should)
+        {
+            if (should == 0)
+            {
+                ClockControl.getClockInstance().Hide();
+                clockControlPanel?.Hide();
+            }
+            else
+            {
+                ClockControl.getClockInstance().Visibility = Visibility.Visible;
+            }
+            SystemTimeControl.SelectedIndex = ShouldShowSystemTime;
+        }
+
+        private void SystemTimeControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShouldEnableSystemClock(ShouldShowSystemTime);
+
+        }
         private void BackgroundHexColorInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (BackgroundHexColorInput.Text.Length != 6)
@@ -310,6 +346,7 @@ namespace SimpleUsefulTimer
         }
         public static void ResetTimer()
         {
+            stopWatch.Stop();
             stopWatch.Reset();
         }
         private void ResetTimerBackground()
@@ -465,7 +502,7 @@ namespace SimpleUsefulTimer
         private void ResetSettings_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Reset();
-            Properties.Settings.Default.Save();
+            Properties.Settings.Default.EnableSystemClock = 0;
             timerView.Close();
         }
 
@@ -473,6 +510,34 @@ namespace SimpleUsefulTimer
         {
             var hcWindow = new Hotkeys(ref Self);
             hcWindow.ShowDialog();
+        }
+
+        private void SetCustomTime_Click(object sender, RoutedEventArgs e)
+        {
+            string pattern = @"^((?<hour>\d+):(?<min>[0-5]?\d):(?<sec>[0-5]?\d))|((?<min>[0-5]?\d):(?<sec>[0-5]?\d))|((?<hour>\d+):(?<min>[0-5]?\d))$";
+            Regex regex = new Regex(pattern);
+            shouldListenForHotkeys = false;
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Please ensure time is in HH:MM:SS or MM:SS format (1:12:01 or 12:01 or 0:12 for example) ", "Enter desired time", "0:00");
+            shouldListenForHotkeys = true;
+            Match match = regex.Match(input);
+
+            int hour = 0, minute = 0, second = 0;
+
+            if (match.Success)
+            {
+                if (match.Groups["hour"].Value.Length > 0)
+                    hour =   int.Parse(match.Groups["hour"].Value);
+                if (match.Groups["min"].Value.Length > 0)
+                    minute = int.Parse(match.Groups["min"].Value);
+                if (match.Groups["sec"].Value.Length > 0)
+                    second = match.Groups["sec"].Success ? int.Parse(match.Groups["sec"].Value) : 0;
+
+                TimerOffsetMs = ((hour * 3600) + (minute * 60) + (second)) * 1000;
+            }
+            else
+            {
+                TimerOffsetMs = 0;
+            }
         }
 
         private void NumberBox_ValueChanged(object sender, RoutedEventArgs e)

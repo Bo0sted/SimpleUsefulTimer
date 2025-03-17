@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ClockControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ClockMonitor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="FontPicker.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

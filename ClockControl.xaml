@@ -1,0 +1,53 @@
+﻿<Window x:Class="SimpleUsefulTimer.ClockControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleUsefulTimer" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
+        Title="ClockControlWindow" ResizeMode="NoResize" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" Topmost="True" Visibility="Visible">
+    <StackPanel Margin="15">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="System Clock Monitor Settings" FontFamily="Segoe UI Variable Display Bold" FontSize="25" Foreground="White"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,10,0,0" Text="Background" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="150,10,0,0" Text="Foreground" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox SelectionChanged="ClockBackgroundSettingCombo_SelectionChanged" Name="ClockBackgroundSettingCombo" SelectedIndex="{Binding ClockBackgroundSetting, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" >
+                    <ComboBoxItem Content="Reflect Timer"/>
+                    <ComboBoxItem Content="Transparent"/>
+                    <ComboBoxItem Content="Custom"/>
+                </ComboBox>
+                <Grid>
+                    <TextBox FontFamily="Seogue UI Variable" Margin="10,0,0,0" x:Name="ClockBackgroundInput" Width="100" TextChanged="ClockBackgroundInput_TextChanged" MaxLength="6"/>
+                    <TextBlock Text="#" FontFamily="Seogue UI Variable" Foreground="White" FontSize="18" Margin="10,7,0,0" HorizontalAlignment="Left" Width="17"/>
+                </Grid>
+            </StackPanel>
+            
+            <ComboBox Margin="20,0,0,0" Name="ClockForegroundCombo" SelectionChanged="ClockForegroundCombo_SelectionChanged" SelectedIndex="{Binding ClockForegroundSetting, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" >
+                <ComboBoxItem Content="Reflect Timer"/>
+                <ComboBoxItem Content="Custom"/>
+            </ComboBox>
+            <Grid>
+                <TextBox FontFamily="Seogue UI Variable" Margin="10,0,0,0" x:Name="ClockForegroundInput" Width="100" TextChanged="ClockForegroundInput_TextChanged" MaxLength="6"/>
+                <TextBlock Text="#" FontFamily="Seogue UI Variable" Foreground="White" FontSize="18" Margin="10,7,0,0" HorizontalAlignment="Left" Width="17"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,10,0,0" Text="Font Size" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="115,10,0,0" Text="Font Changer" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+           </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <ui:NumberBox Text="{Binding ClockFontSize, Mode=OneWayToSource}" Minimum="5" Maximum="1000" IsUndoEnabled="False" ClearButtonEnabled="False" FontFamily="Seogue UI Variable" Margin="0,0,0,0" x:Name="ClockFontSizeInput" TextChanged="ClockFontSizeInput_TextChanged" MaxLength="3"/>
+            <ui:Button Margin="70,0,0,0" Name="ClockControlFontChanger" Content="Change" Click="ClockControlFontChanger_Click"/>
+        </StackPanel>
+
+        
+    </StackPanel>
+</Window>

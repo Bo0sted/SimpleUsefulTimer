@@ -38,6 +38,19 @@ namespace SimpleUsefulTimer
             public IntPtr dwExtraInfo;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+        }
+        [DllImport("user32.dll")]
+        static extern bool GetCursorPos(out POINT lpPoint);
+        [DllImport("user32.dll")]
+        static extern bool SetCursorPos(int X, int Y);
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+
         [DllImport("user32.dll")]
         private static extern IntPtr SetWindowsHookEx(WH idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
@@ -72,13 +85,13 @@ namespace SimpleUsefulTimer
                 KBDLLHOOKSTRUCT kbStruct = Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam);
 
                 //0x0101 (WM_KEYUP): Triggered when a key is released.
-                 if ((wParam == (IntPtr)0x0101) &&
-                    (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._toggleTimerHotkey)))
+                if ((wParam == (IntPtr)0x0101) &&
+                   (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._toggleTimerHotkey)))
                 {
                     TimerControl.ToggleTimer();
                 }
-               else if ((wParam == (IntPtr)0x0101) &&
-                    (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._resetTimerHotkey)))
+                else if ((wParam == (IntPtr)0x0101) &&
+                     (kbStruct.vkCode == KeyInterop.VirtualKeyFromKey(tc._resetTimerHotkey)))
                 {
                     TimerControl.ResetTimer();
                 }

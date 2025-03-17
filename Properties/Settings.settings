@@ -38,7 +38,7 @@
     <Setting Name="UseCustomTimerForeground" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DidReadWelcomeMessage" Type="System.Boolean" Scope="User">
+    <Setting Name="Setting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DefaultToggleTimerHotkey" Type="System.Int32" Scope="Application">
@@ -67,6 +67,36 @@
     </Setting>
     <Setting Name="WindowWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="DidReadWelcomeMessage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnableSystemClock" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ClockBackground" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ClockFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Segoe UI Variable Display Bold</Value>
+    </Setting>
+    <Setting Name="ClockFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="ClockForeground" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ClockFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">t</Value>
+    </Setting>
+    <Setting Name="ClockBackgroundSetting" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ClockForegroundSetting" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastKnowClockPosition" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

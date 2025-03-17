@@ -89,7 +89,6 @@ namespace SimpleUsefulTimer
             tc.MsFieldAlignment = s.MsFieldAlignment;
             Width = s.WindowWidth;
             Height = s.WindowHeight;
-
             this.UpdateLayout();
         }
 
@@ -107,6 +106,7 @@ namespace SimpleUsefulTimer
             var lastKnownLocation = new System.Drawing.Point(x: currentLeft, y: currentTop);
             s.LastTimerWindowPosition = lastKnownLocation;
             s.MsFieldAlignment = timerControl.MsFieldControl.SelectedIndex;
+            s.EnableSystemClock = timerControl.SystemTimeControl.SelectedIndex;
             s.WindowHeight = (int)Height;
             s.WindowWidth = (int)Width;
             s.Save();

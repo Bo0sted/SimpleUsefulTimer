@@ -1,0 +1,30 @@
+﻿<Window x:Class="SimpleUsefulTimer.Hotkeys"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleUsefulTimer"
+        mc:Ignorable="d"
+        Title="Hotkey manager" SizeToContent="Height" Width="400" Background="#0F0F0F" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" PreviewKeyUp="Window_PreviewKeyUp">
+
+    <Window.Resources>
+        <local:Win32KeyToStringConverter x:Key="Win32KeyToStringConverter"/>
+    </Window.Resources>
+    
+    <StackPanel Margin="10">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+            <TextBlock FontFamily="Segoe UI Variable Display Bold" Text="Selected Key: " FontSize="20" Foreground="White"/>
+            <TextBlock TextWrapping="Wrap" Width="200" Name="SelectedKey" FontFamily="Segoe UI Variable Display" Text="{Binding CurrentKey, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Win32KeyToStringConverter}}" FontSize="20" Foreground="White"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontFamily="Segoe UI Variable Display Bold" Text="Start/Stop: " FontSize="20" Foreground="White"/>
+            <TextBlock FontFamily="Segoe UI Variable Display" Foreground="White" FontSize="20" Text="{Binding StartStop, Converter={StaticResource Win32KeyToStringConverter}}"/>
+            <Button Content="Assign" Name="AssignStartStop" Click="AssignButton_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontFamily="Segoe UI Variable Display Bold" Text="Reset: " FontSize="20" Foreground="White"/>
+            <TextBlock FontFamily="Segoe UI Variable Display" Foreground="White" FontSize="20" Text="{Binding Reset,Converter={StaticResource Win32KeyToStringConverter}}"/>
+            <Button Content="Assign" Click="AssignButton_Click" Name="AssignReset"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

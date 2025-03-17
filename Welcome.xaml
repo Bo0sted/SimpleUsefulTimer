@@ -11,8 +11,9 @@
         <TextBlock FontSize="25" x:Name="WarmWelcome" Text="" FontFamily="Segoe UI Variable Display Bold" Foreground="White"/>
         <TextBlock FontFamily="Segoe UI Variable" Foreground="White" TextWrapping="Wrap">
             <Bold><Italic><Run Text="Right click"/></Italic></Bold><Run Text=" on the "/><Bold>
-            <Italic><Run Text="Timer"/></Italic></Bold><Run Text=" anytime you want to show or hide the configuration panel."/><LineBreak/>
-            <LineBreak/><Bold><Italic><Run Text="Your settings"/></Italic>
+            <Italic><Run Text="Timer"/></Italic></Bold><Run Text=" or the "/><Bold>
+            <Italic><Run Text="Clock"/></Italic></Bold><Run Text=" anytime you want to show or hide its respective configuration panel."/><LineBreak/>
+            <LineBreak/><Bold><Italic><Run Text="All your settings"/></Italic>
             </Bold><Run Text=" are saved automatically when the config window is closed and stored in "/><Italic>your Local AppData folder</Italic>
         </TextBlock>
 

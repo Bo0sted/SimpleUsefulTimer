@@ -29,6 +29,16 @@ namespace SimpleUsefulTimer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         readonly private TimerControl tc;
+        readonly private ClockControl cc;
+
+        private enum ControlMode
+        {
+            TimerControlMode,
+            ClockControlMode,
+        }
+
+        private ControlMode whichControlMode = ControlMode.TimerControlMode;
+        // TimerControl is Control 0 and ClockControl is 1
         readonly private Properties.Settings s = Properties.Settings.Default;
         readonly public string defaultTimerFont;
         private string _selectedFont = "";
@@ -39,6 +49,7 @@ namespace SimpleUsefulTimer
         {
             DataContext = this;
             InitializeComponent();
+            whichControlMode = ControlMode.TimerControlMode;
             defaultTimerFont = s.DefaultTimerFont;
             this.tc = tc;
             SelectedFont = tc.TimerCustomFont;
@@ -52,20 +63,57 @@ namespace SimpleUsefulTimer
 
 
         }
+        //ClockControl version
+        public FontPicker(ref ClockControl cc)
+        {
+            DataContext = this;
+            InitializeComponent();
+            whichControlMode = ControlMode.ClockControlMode;
+            this.cc = cc;
+            SelectedFont = cc.ClockFont;
+
+            foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
+            {
+                // FontFamily.Source contains the font family name.
+                UserFonts.Add(fontFamily);
+            }
+            UserFonts = new ObservableCollection<FontFamily>(UserFonts.OrderBy(c => c.Source));
+
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SelectedFont = defaultTimerFont;
-            tc.TimerCustomFont = SelectedFont;
-            s.TimerFont = "";
+            if (whichControlMode is ControlMode.TimerControlMode)
+            {
+                SelectedFont = defaultTimerFont;
+                tc.TimerCustomFont = SelectedFont;
+                s.TimerFont = SelectedFont;
+            }
+            else if (whichControlMode is ControlMode.ClockControlMode)
+            {
+                SelectedFont = defaultTimerFont;
+                cc.ClockFont = SelectedFont;
+                s.ClockFont = SelectedFont;
+            }
+
             s.Save();
             s.Reload();
         }
 
         private void SaveCustomFont_Click(object sender, RoutedEventArgs e)
         {
-            tc.TimerCustomFont = SelectedFont;
-            s.TimerFont = SelectedFont;
+            if (whichControlMode is ControlMode.TimerControlMode)
+            {
+                tc.TimerCustomFont = SelectedFont;
+                s.TimerFont = SelectedFont;
+            }
+            else if (whichControlMode is ControlMode.ClockControlMode)
+            {
+                cc.ClockFont = SelectedFont;
+                s.ClockFont = SelectedFont;
+            }
+
             s.Save();
             s.Reload();
         }

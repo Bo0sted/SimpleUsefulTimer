@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleUsefulTimer"
         mc:Ignorable="d"
-        Title="FontPicker" SizeToContent="Height" Width="400" Background="#0F0F0F" ResizeMode="NoResize">
+        Title="FontPicker" SizeToContent="Height" Width="400" Background="#0F0F0F" ResizeMode="NoResize" Topmost="True" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <StackPanel Margin="10,10,0,0">
             <TextBlock Text="Use a custom font" FontFamily="Segoe UI Variable Display Bold" FontSize="25" Foreground="White"/>

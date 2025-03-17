@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleUsefulTimer"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SimpleUsefulTimer.TimerControl"
         mc:Ignorable="d"
-        Title="TimerControl" Visibility="Hidden" SizeToContent="Height" Width="800" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" ResizeMode="NoResize">
+        Title="TimerControl" Visibility="Visible" SizeToContent="WidthAndHeight" Width="800" Background="#0F0F0F" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Closing="Window_Closing" ResizeMode="NoResize">
     <StackPanel Margin="15">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Timer Settings" FontFamily="Segoe UI Variable Display Bold" FontSize="25" Foreground="White"/>
@@ -57,6 +57,7 @@
         <!--        <TextBlock Margin="0,10,0,0" Text="Text" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/> -->
         <StackPanel Orientation="Horizontal">
             <TextBlock Margin="0,10,0,0" Text="MS Field" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+            <TextBlock Margin="140,10,0,0" Text="System Time Monitor Module" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <ComboBox Name="MsFieldControl"  SelectionChanged="MsFieldControl_SelectionChanged" SelectedIndex="{Binding MsFieldAlignment, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
@@ -65,10 +66,17 @@
                 <ComboBoxItem Name="MsFieldBottom" Content="Align to the bottom"/>
                 <ComboBoxItem Name="MsFieldDisable" Content="Disable field"/>
             </ComboBox>
+            <ComboBox Margin="20,0,0,0" Name="SystemTimeControl"  SelectionChanged="SystemTimeControl_SelectionChanged" SelectedIndex="{Binding ShouldShowSystemTime, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Name="SystemTimeHide" Content="Disable"/>
+                <ComboBoxItem Name="SystemTimeShow" Content="Enable"/>
+            </ComboBox>
         </StackPanel>
         <StackPanel>
             <TextBlock Margin="0,10,0,0" Text="Behavior" FontFamily="Segoe UI Variable Display Bold" FontSize="15" Foreground="White"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
             <Button Name="HotkeyManagerControl" Content="Hotkey manager" Click="HotkeyManagerControlButton_Click"/>
+            <Button Name="SetCustomTime" Content="Set Custom Time" Click="SetCustomTime_Click"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Button Margin="0,10,0,0" Name="ResetWelcomeMessage" Content="Reset Welcome Message" Click="ResetWelcomeMessage_Click"/>
