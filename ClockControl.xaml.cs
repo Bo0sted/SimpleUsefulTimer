@@ -90,7 +90,7 @@ namespace SimpleUsefulTimer
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //e.Cancel = true;
+            e.Cancel = true;
             s.Save();
             Visibility = Visibility.Hidden;
             UpdateLayout();
