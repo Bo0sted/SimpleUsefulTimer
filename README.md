@@ -1,8 +1,8 @@
 
 # SimpleUsefulTimer
 
-**Update June 2025: I am beginning the re-development of this application on the Qt framework this way there will be one unified version that works on both Windows and Linux**
-
+**As of June 2025 I am re-developing this app to make it cross platform using the wonderful [Qt platform](https://www.qt.io/). Stay tuned!**
+====================================================================================
 **I made this timer with ease of use and simplicity in mind. Default settings shown in the picture.**
 
 **Program Features and Behavior:**
