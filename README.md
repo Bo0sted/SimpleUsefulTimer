@@ -1,7 +1,7 @@
 
 # SimpleUsefulTimer
 
-**As of June 2025 I am re-developing this app to make it cross platform using the wonderful [Qt platform](https://www.qt.io/). Stay tuned! ETA: Before GTA VI**
+**New and improved version using the wonderful [Qt platform](https://www.qt.io/). [Check it out here](https://github.com/Bo0sted/CrossplatformStopwatch)**
 ====================================================================================
 **I made this timer with ease of use and simplicity in mind. Default settings shown in the picture.**
 
